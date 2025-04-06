@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tháng 3 - Hành Trình Yêu Thương</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+            font-family: 'Pacifico', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto; /* Cho phép cuộn ngang nếu cần */
+        }
+
+        .container {
+            text-align: center;
+            color: #fff;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 6 cột đều nhau */
+            grid-gap: 20px; /* Khoảng cách giữa các cột */
+            max-width: 1500px; /* Chiều rộng tối đa của khung */
+            width: 100%; /* Đảm bảo không vượt quá container */
+            margin: 0 auto;
+        }
+
+        .photo-column {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            animation: fadeIn 3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .photo-column img,
+        .photo-column video {
+            width: 100%;
+            height: 200px; /* Chiều cao cố định cho ảnh và video */
+            object-fit: cover; /* Căn vừa khung */
+            border-radius: 10px;
+        }
+
+        .photo-column p {
+            margin: 10px 0 0;
+            font-size: 1em;
+            color: #ff6b6b;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            transform: rotate(-45deg);
+            animation: fall 5s linear infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tháng 3 </h1>
+        <div class="photo-grid">
+            <div class="photo-column">
+                <img src="anh3/1.jpg" alt="Ảnh 1">
+            </div>
+            <div class="photo-column">
+                <img src="anh3/2.jpg" alt="Ảnh 2">
+            </div>
+            <div class="photo-column">
+                <img src="anh3/3.jpg" alt="Ảnh 3">
+            </div>
+            <div class="photo-column">
+                <img src="anh3/4.jpg" alt="Ảnh 4">
+            </div>
+            <div class="photo-column">
+                <img src="anh3/5.jpg" alt="Ảnh 5">
+            </div>
+            <div class="photo-column">
+                <video controls>
+                    <source src="anh3/6.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="hearts-container" id="hearts"></div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

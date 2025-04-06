@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dòng Thời Gian - Hành Trình Tàu Yêu Thương</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+            font-family: 'Pacifico', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung dài */
+        }
+
+        .container {
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+        .train-timeline {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 300px; /* Chiều cao cố định để tàu nằm ngang */
+        }
+
+        .rail {
+            position: absolute;
+            height: 8px;
+            background: #ff6b6b;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .train-car {
+            width: 200px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #ff6b6b;
+            position: relative;
+            animation: sway 2s infinite ease-in-out;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .train-car h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+        }
+
+        .train-car p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Bánh xe */
+        .train-car::before,
+        .train-car::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            bottom: -30px;
+        }
+
+        .train-car::before {
+            left: 30px;
+        }
+
+        .train-car::after {
+            right: 30px;
+        }
+
+        /* Toa đầu tiên (đầu tàu) với ống khói */
+        .train-car:first-child {
+            background: rgba(255, 255, 255, 0.9);
+            border-top-right-radius: 50px; /* Bo tròn đầu tàu */
+            position: relative;
+        }
+
+        .chimney {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: #ff6b6b;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* Hiệu ứng khói */
+        .smoke {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: smokeRise 2s infinite ease-out;
+        }
+
+        .smoke:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .smoke:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes smokeRise {
+            0% {
+                transform: translateX(-50%) translateY(0) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-50px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            transform: rotate(-45deg);
+            animation: fall 5s linear infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes sway {
+            0% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            100% { transform: translateX(-5px); }
+        }
+
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Timeline Date</h1>
+        <div class="train-timeline">
+            <div class="rail"></div>
+            <div class="train-car">
+                <div class="chimney"></div>
+                <div class="smoke"></div>
+                <div class="smoke"></div>
+                <div class="smoke"></div>
+                <h3>15:00pm</h3>
+                <p>Đón em bé con ở nhà.</p>
+            </div>
+            <div class="train-car">
+                <h3>15:30pm</h3>
+                <p>Đi chơi ở công viên Thủ Lệ.</p>
+            </div>
+            <div class="train-car">
+                <h3>17:40pm</h3>
+                <p>Đi chụp Photobooth ở FotoFlicker.</p>
+            </div>
+            <div class="train-car">
+                <h3>18:40pm</h3>
+                <p>Đi ăng tối ở thịt nướng CTQ.</p>
+            </div>
+            <div class="train-car">
+                <h3>20:00pm</h3>
+                <p>Đi coffee nói những lời iu thương.</p>
+            </div>
+            <div class="train-car">
+                <h3>22:30pm</h3>
+                <p>Đưa em bé về và trao những cái ôm nồng ấm</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hearts-container" id="hearts"></div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

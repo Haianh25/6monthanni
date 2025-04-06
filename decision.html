@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quyết Định</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2b2b2b, #4a4a4a); /* Gradient tối: đen xám */
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            color: #e0e0e0; /* Màu chữ xám nhạt */
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 3s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            background: #4a4a4a; /* Nền xám đậm */
+            border: 2px solid #e0e0e0; /* Viền xám nhạt */
+            border-radius: 5px; /* Bo tròn nhẹ */
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            animation: fadeIn 3.5s ease-in-out;
+        }
+
+        button:hover {
+            background: #6b6b6b; /* Xám sáng hơn khi hover */
+            color: #ffffff;
+        }
+
+        #noBtn {
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quyết Định</h1>
+        <p>Anh biết dạo gần đây chúng ta đã trải qua những khó khăn, nhưng chúng ta vẫn chọn cố gắng cùng nhau.<br>
+           Tuy nhiên, để tiếp tục câu chuyện này, em có muốn vẫn là người yêu của anh không?</p>
+        <div class="buttons">
+            <button onclick="window.location.href='home.html'">Có</button>
+            <button id="noBtn" onmouseover="moveNoButton()">Không</button>
+        </div>
+    </div>
+
+    <script>
+        function moveNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+        }
+    </script>
+</body>
+</html>
